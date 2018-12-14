@@ -1,4 +1,5 @@
 #include "gmock/gmock.h"
+#include "GenericReflect.hh"
 #include "SubscriberReflect.hh"
 #include "SubscriberPot.hh"
 #include "SubscriberPod.hh"
@@ -11,11 +12,18 @@ using namespace std;
 class ReflectUtil: public Test
 {
 public:
-    SubscriberPot pot;
-    SubscriberPod pod;
+    GenericReflect<SubscriberPot, SubscriberPod>::PotVector pv =
+    {
+        new SubscriberPot{"", 0, 0, ""},
+        new SubscriberPot{"", 0, 0, ""},
+        new SubscriberPot{"", 0, 0, ""},
+        new SubscriberPot{"", 0, 0, ""},
+        new SubscriberPot{"", 0, 0, ""},
+        new SubscriberPot{"", 0, 0, ""}
+    };
     SubscriberReflect reflect;
 
-    ReflectUtil() : pot("", 0, 0, ""), reflect(&pot, &pod)
+    ReflectUtil() :  reflect(pv)
     {
     }
 };

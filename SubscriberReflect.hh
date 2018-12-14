@@ -12,8 +12,8 @@
 class SubscriberReflect : public GenericReflect<SubscriberPot, SubscriberPod>
 {
 public:
-    SubscriberReflect(SubscriberPot* pot, SubscriberPod* pod)
-        : GenericReflect<SubscriberPot, SubscriberPod>(pot, pod)
+    SubscriberReflect(const PotVector& pv)
+        : GenericReflect<SubscriberPot, SubscriberPod>(pv)
     {
         attributeMap =
         {

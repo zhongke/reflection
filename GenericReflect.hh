@@ -13,8 +13,8 @@ public:
     using PotVector = std::vector<PT*>;
     using PodVector = std::vector<P*>;
 
-    GenericReflect(PT* pot, P* pod)
-        : pot(pot), pod(pod)
+    GenericReflect(const PotVector& pv)
+        : potVec(pv)
     {
     }
 
@@ -46,11 +46,11 @@ public:
 protected:
     virtual RefectingMap getAttributeMap() const = 0;
 
-    RefectingMap attributeMap ;
+    RefectingMap attributeMap;
 
     PT* pot;
     P* pod;
 
-    std::vector<PT*> potVec;
+    PotVector potVec;
 };
 
