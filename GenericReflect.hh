@@ -2,7 +2,7 @@
 
 #include <map>
 #include <iostream>
-#include "Checker.hh"
+#include "CheckerInt.hh"
 
 template<typename PT, typename P>
 class GenericReflect
@@ -21,9 +21,9 @@ public:
 
        }
 
-       virtual std::map<std::string, Checker<PT, P>> getAttributeMap() const = 0;
+       virtual std::map<std::string, CheckerInt<PT, P>> getAttributeMap() const = 0;
 protected:
-       std::map<std::string, Checker<PT, P>> attributeMap ;
+       std::map<std::string, CheckerInt<PT, P>> attributeMap ;
 
        PT* pot;
        P* pod;

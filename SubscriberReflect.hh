@@ -14,13 +14,13 @@ public:
        SubscriberReflect()
        {
                attributeMap = {
-                      {"eventTrigger", Checker<SubscriberPot, SubscriberPod>(std::bind(&SubscriberPot::eventTrigger_hasValue, pot),
+                      {"eventTrigger", CheckerInt<SubscriberPot, SubscriberPod>(std::bind(&SubscriberPot::eventTrigger_hasValue, pot),
                                                                              std::bind(&SubscriberPot::eventTrigger_get, pot),
                                                                              std::bind(&SubscriberPod::setEventTrigger, pod, std::placeholders::_1))},
                };
        }
 
-       std::map<std::string, Checker<SubscriberPot, SubscriberPod>> getAttributeMap() const
+       std::map<std::string, CheckerInt<SubscriberPot, SubscriberPod>> getAttributeMap() const
        {
               return attributeMap;
        }

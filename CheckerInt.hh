@@ -1,17 +1,28 @@
+#include <map>
+#include <string>
+
+using namespace std;
+
 template<typename PT, typename P>
 class CheckerInt
 {
 public:
-        CheckerInt()
-                {
+        CheckerInt(std::function<bool()> has,
+                std::function<int()> getter,
+                std::function<void(int)> setter) :
+                hasM(has), getterM(getter), setterM(setter)
+        {}
 
-                }
+        bool operator () (string condition) {
 
-        bool operator () (std::function<bool()> hasF,
-                          std::function<int()> getF,
-                          std::function<void(int)> setF)
-
-        {
+                return false;
 
         }
+
+private:
+        std::function<bool()> hasM;
+        std::function<int()> getterM;
+        std::function<void(int)> setterM;
 };
+
+
