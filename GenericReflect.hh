@@ -9,6 +9,10 @@ template<typename PT, typename P>
 class GenericReflect
 {
 public:
+    using RefectingMap = std::map<std::string, Checker<PT, P>*>;
+    using PotVector = std::vector<PT*>;
+    using PodVector = std::vector<P*>;
+
     GenericReflect(PT* pot, P* pod)
         : pot(pot), pod(pod)
     {
@@ -18,7 +22,7 @@ public:
     // std::pair<std::map<std::string, std::vector<std::string>>, std::vector<std::string>>
     // 1. map -> filter key : vector
     // 2. vector -> selected fields
-    void getPodByCondition(std::map<std::string, std::string>& condition)
+    PodVector getPodByCondition(std::map<std::string, std::string>& condition)
     {
         auto map = getAttributeMap();
 
@@ -35,11 +39,13 @@ public:
         }
 
         // TODO: Set selected fields if has value
-
+        PodVector pv;
+        return pv;
     }
-    using RefectingMap = std::map<std::string, Checker<PT, P>*>;
-    virtual RefectingMap getAttributeMap() const = 0;
+
 protected:
+    virtual RefectingMap getAttributeMap() const = 0;
+
     RefectingMap attributeMap ;
 
     PT* pot;
