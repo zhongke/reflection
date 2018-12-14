@@ -3,7 +3,8 @@
 
 #include "Checker.hh"
 
-using namespace std;
+#include <iostream>
+
 
 template<typename PT, typename P>
 class CheckerInt : public Checker <PT, P>
@@ -15,16 +16,15 @@ public:
         hasM(has), getterM(getter), setterM(setter)
     {}
 
-    bool operator () (string condition)
+    bool operator () (std::string condition)
     {
-        // TODO:
-        /*
         if (!hasM() or condition != std::to_string(getterM())) {
                return false;
         } else {
-               // setterM(this);
+            // TODO: Move to another place to handle setter
+               setterM(getterM());
         }
-        */
+
         return true;
 
     }

@@ -12,7 +12,7 @@ public:
 
     }
 
-    bool operator () (string condition)
+    bool operator () (std::string condition)
     {
         return true;
     }
