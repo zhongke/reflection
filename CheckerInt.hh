@@ -14,8 +14,15 @@ public:
         {}
 
         bool operator () (string condition) {
-
-                return false;
+               // TODO:
+               /*
+               if (!hasM() or condition != std::to_string(getterM())) {
+                      return false;
+               } else {
+                      // setterM(this);
+               }
+               */
+                return true;
 
         }
 

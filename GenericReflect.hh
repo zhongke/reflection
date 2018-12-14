@@ -9,18 +9,17 @@ class GenericReflect
 {
 public:
        GenericReflect(PT* pot, P* pod)
-              : pot(pot), pod(pod)   
+              : pot(pot), pod(pod)
        {
        }
 
        void getPodByCondition(std::map<std::string, std::string>& condition)
        {
               auto map = getAttributeMap();
-              auto it = map.begin();
               for (const auto& c : condition) {
                       auto iter = map.find(c.first);
-                      if (it != map.end()) {
-                             if (!(it->second)(c.second))
+                      if (iter != map.end()) {
+                             if (!(iter->second)(c.second))
                                     break;
                       }
               }
