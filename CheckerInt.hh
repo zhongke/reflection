@@ -18,11 +18,14 @@ public:
 
     bool operator () (std::string condition)
     {
-        if (!hasM() or condition != std::to_string(getterM())) {
-               return false;
-        } else {
+        if (!hasM() or condition != std::to_string(getterM()))
+        {
+            return false;
+        }
+        else
+        {
             // TODO: Move to another place to handle setter
-               setterM(getterM());
+            setterM(getterM());
         }
 
         return true;

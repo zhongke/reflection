@@ -15,7 +15,7 @@ public:
     SubscriberPod pod;
     SubscriberReflect reflect;
 
-    ReflectUtil() : reflect(&pot, &pod)
+    ReflectUtil() : pot("", 0, 0, ""), reflect(&pot, &pod)
     {
     }
 };

@@ -5,8 +5,8 @@ class CheckerString : public Checker<PT, P>
 {
 public:
     CheckerString(std::function<bool()> has,
-               std::function<std::string()> getter,
-               std::function<void(std::string)> setter) :
+                  std::function<std::string()> getter,
+                  std::function<void(std::string)> setter) :
         hasM(has), getterM(getter), setterM(setter)
     {
 
@@ -14,15 +14,14 @@ public:
 
     bool operator () (std::string condition)
     {
-        return true;
-    }
-
-    bool operator () (std::function<bool()> hasF,
-                      std::function<std::string()> getF,
-                      std::function<void(std::string)> setF)
-
-    {
-
+        if (hasM() && getterM() == condition)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 private:

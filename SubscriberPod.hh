@@ -3,18 +3,19 @@
 #include <string>
 #include <vector>
 
-class SubscriberPod {
+class SubscriberPod
+{
 public:
-        std::string getId() const;
-        void setId(const std::string& id);
-        bool isSetId() const;
+    std::string getId() const;
+    void setId(const std::string& id);
+    bool isSetId() const;
 
-        int getEventTrigger() const;
-        void setEventTrigger(int eventTrigger);
-        bool isSetEventTrigger() const;
+    int getEventTrigger() const;
+    void setEventTrigger(int eventTrigger);
+    bool isSetEventTrigger() const;
 
 private:
-        std::pair<std::string, bool> idM;
-        std::vector<std::string> dataplans;
-        std::pair<int, bool> eventTriggerM;
+    std::pair<std::string, bool> idM;
+    std::vector<std::string> dataplans;
+    std::pair<int, bool> eventTriggerM;
 };
