@@ -8,6 +8,10 @@ template<typename PT, typename P>
 class GenericReflect
 {
 public:
+       GenericReflect(PT* pot, P* pod)
+              : pot(pot), pod(pod)   
+       {
+       }
 
        void getPodByCondition(std::map<std::string, std::string>& condition)
        {

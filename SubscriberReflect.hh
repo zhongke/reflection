@@ -11,7 +11,8 @@
 class SubscriberReflect : public GenericReflect<SubscriberPot, SubscriberPod>
 {
 public:
-       SubscriberReflect()
+       SubscriberReflect(SubscriberPot* pot, SubscriberPod* pod)
+              : GenericReflect<SubscriberPot, SubscriberPod>(pot, pod)
        {
                attributeMap = {
                       {"eventTrigger", CheckerInt<SubscriberPot, SubscriberPod>(std::bind(&SubscriberPot::eventTrigger_hasValue, pot),

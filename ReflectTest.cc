@@ -10,6 +10,10 @@ class ReflectUtil: public Test
 {
 public:
         SubscriberReflect reflect;
+
+        ReflectUtil() : reflect(nullptr, nullptr)
+        {
+        }
 };
 
 TEST_F(ReflectUtil, getOneFilter)
