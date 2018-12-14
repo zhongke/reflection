@@ -15,8 +15,8 @@ public:
        {
                attributeMap = {
                       {"eventTrigger", CheckerInt<SubscriberPot, SubscriberPod>(std::bind(&SubscriberPot::eventTrigger_hasValue, pot),
-                                                                             std::bind(&SubscriberPot::eventTrigger_get, pot),
-                                                                             std::bind(&SubscriberPod::setEventTrigger, pod, std::placeholders::_1))},
+                                                                                std::bind(&SubscriberPot::eventTrigger_get, pot),
+                                                                                std::bind(&SubscriberPod::setEventTrigger, pod, std::placeholders::_1))},
                };
        }
 

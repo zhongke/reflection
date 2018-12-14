@@ -11,11 +11,13 @@ public:
 
        void getPodByCondition(std::map<std::string, std::string>& condition)
        {
-              auto it = attributeMap.begin();
+              auto map = getAttributeMap();
+              auto it = map.begin();
               for (const auto& c : condition) {
-                      auto iter = attributeMap.find(c.first);
-                      if (it != attributeMap.end()) {
-                             (it->second)(c.second);
+                      auto iter = map.find(c.first);
+                      if (it != map.end()) {
+                             if (!(it->second)(c.second))
+                                    break;
                       }
               }
 
