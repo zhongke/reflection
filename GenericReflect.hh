@@ -2,7 +2,7 @@
 
 #include <map>
 #include <iostream>
-#include "CheckerInt.hh"
+#include "Checker.hh"
 
 template<typename PT, typename P>
 class GenericReflect
