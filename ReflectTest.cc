@@ -32,8 +32,10 @@ TEST_F(ReflectUtil, getOneFilter)
 {
     map<string, string> condition
     {
-        {"eventTrigger", "200"}
+        {"eventTrigger", "200"},
+        {"id", "charlie"}
     };
-    reflect.getPodByCondition(condition);
+    vector<string> select{"subscriptionType", "peerId"};
+    reflect.getPodByCondition(condition, select);
 }
 

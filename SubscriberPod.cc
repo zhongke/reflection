@@ -3,7 +3,6 @@
 std::string SubscriberPod::getId() const
 {
     return idM.first;
-
 }
 
 void SubscriberPod::setId(const std::string& id)

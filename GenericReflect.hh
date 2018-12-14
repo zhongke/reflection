@@ -22,7 +22,7 @@ public:
     // std::pair<std::map<std::string, std::vector<std::string>>, std::vector<std::string>>
     // 1. map -> filter key : vector
     // 2. vector -> selected fields
-    PodVector getPodByCondition(std::map<std::string, std::string>& condition)
+    PodVector getPodByCondition(std::map<std::string, std::string>& condition, std::vector<std::string> select)
     {
         auto map = getAttributeMap();
 
@@ -42,6 +42,10 @@ public:
                         match = false;
                         break;
                     }
+                }
+                else
+                {
+                    // TODO: key not match, do sth!!!
                 }
             }
 
