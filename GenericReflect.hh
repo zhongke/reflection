@@ -2,14 +2,14 @@
 
 #include <map>
 #include <iostream>
-#include "Checker.hh"
+#include "Proxy.hh"
 #include <vector>
 
 template<typename PT, typename P>
 class GenericReflect
 {
 public:
-    using RefectingMap = std::map<std::string, Checker<PT, P>*>;
+    using RefectingMap = std::map<std::string, Proxy<PT, P>*>;
     using PotVector = std::vector<PT*>;
     using PodVector = std::vector<P*>;
 
@@ -29,6 +29,8 @@ public:
         for (auto pot : potVec)
         {
             // TODO: only check condition
+            auto match = true;
+
             for (const auto& c : condition)
             {
                 auto iter = map.find(c.first);
@@ -36,8 +38,16 @@ public:
                 if (iter != map.end())
                 {
                     if (!(*iter->second)(pot, c.second))
+                    {
+                        match = false;
                         break;
+                    }
                 }
+            }
+
+            if (match)
+            {
+
             }
         }
 
@@ -56,4 +66,3 @@ protected:
 
     PotVector potVec;
 };
-

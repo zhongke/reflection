@@ -5,8 +5,8 @@
 #include "GenericReflect.hh"
 #include "SubscriberPot.hh"
 #include "SubscriberPod.hh"
-#include "CheckerInt.hh"
-#include "CheckerString.hh"
+#include "ProxyInt.hh"
+#include "ProxyString.hh"
 
 
 class SubscriberReflect : public GenericReflect<SubscriberPot, SubscriberPod>
@@ -18,13 +18,13 @@ public:
         attributeMap =
         {
             {
-                "eventTrigger", new CheckerInt<SubscriberPot, SubscriberPod>(
+                "eventTrigger", new ProxyInt<SubscriberPot, SubscriberPod>(
                     std::mem_fn(&SubscriberPot::eventTrigger_hasValue),
                     std::mem_fn(&SubscriberPot::eventTrigger_get),
                     std::bind(&SubscriberPod::setEventTrigger, pod, std::placeholders::_1))
             },
             {
-                "id", new CheckerString<SubscriberPot, SubscriberPod>(
+                "id", new ProxyString<SubscriberPot, SubscriberPod>(
                     std::bind(&SubscriberPot::id_hasValue, pot),
                     std::bind(&SubscriberPot::id_get, pot),
                     std::bind(&SubscriberPod::setId, pod, std::placeholders::_1))
@@ -39,4 +39,3 @@ public:
 private:
 
 };
-

@@ -2,15 +2,15 @@
 #include <string>
 #include <functional>
 
-#include "Checker.hh"
+#include "Proxy.hh"
 
 template<typename PT, typename P>
-class CheckerInt : public Checker <PT, P>
+class ProxyInt : public Proxy <PT, P>
 {
 public:
-    CheckerInt(std::function<bool(PT*)> has,
-               std::function<int(PT*)> getter,
-               std::function<void(int)> setter) :
+    ProxyInt(std::function<bool(PT*)> has,
+             std::function<int(PT*)> getter,
+             std::function<void(int)> setter) :
         hasM(has), getterM(getter), setterM(setter)
     {}
 
@@ -35,5 +35,3 @@ private:
     std::function<int(PT*)> getterM;
     std::function<void(int)> setterM;
 };
-
-

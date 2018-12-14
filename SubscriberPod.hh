@@ -14,8 +14,17 @@ public:
     void setEventTrigger(int eventTrigger);
     bool isSetEventTrigger() const;
 
+    int getSubscriptionType() const;
+    void setSubscriptionType(int subscriptionType);
+    bool isSubscriptionType() const;
+
+    std::string getPeerId() const;
+    void setPeerId(const std::string& peerId);
+    bool isPeerId() const;
+
 private:
     std::pair<std::string, bool> idM;
-    std::vector<std::string> dataplans;
     std::pair<int, bool> eventTriggerM;
+    std::pair<int, bool> subscriptionTypeM;
+    std::pair<std::string, bool> peerIdM;
 };

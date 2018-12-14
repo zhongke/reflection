@@ -1,12 +1,14 @@
 #include <string>
 
+#include "Proxy.hh"
+
 template<typename PT, typename P>
-class CheckerString : public Checker<PT, P>
+class ProxyString : public Proxy<PT, P>
 {
 public:
-    CheckerString(std::function<bool()> has,
-                  std::function<std::string()> getter,
-                  std::function<void(std::string)> setter) :
+    ProxyString(std::function<bool()> has,
+                std::function<std::string()> getter,
+                std::function<void(std::string)> setter) :
         hasM(has), getterM(getter), setterM(setter)
     {
 
