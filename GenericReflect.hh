@@ -26,15 +26,18 @@ public:
     {
         auto map = getAttributeMap();
 
-        // TODO: only check condition
-        for (const auto& c : condition)
+        for (auto pot : potVec)
         {
-            auto iter = map.find(c.first);
-
-            if (iter != map.end())
+            // TODO: only check condition
+            for (const auto& c : condition)
             {
-                if (!(*iter->second)(c.second))
-                    break;
+                auto iter = map.find(c.first);
+
+                if (iter != map.end())
+                {
+                    if (!(*iter->second)(pot, c.second))
+                        break;
+                }
             }
         }
 

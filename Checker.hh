@@ -4,5 +4,5 @@ template<typename PT, typename P>
 class Checker
 {
 public:
-    virtual bool operator () (std::string condition) = 0;
+    virtual bool operator () (PT* pot, std::string condition) = 0;
 };

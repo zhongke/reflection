@@ -12,7 +12,7 @@ public:
 
     }
 
-    bool operator () (std::string condition)
+    bool operator () (PT* pot, std::string condition)
     {
         if (hasM() && getterM() == condition)
         {

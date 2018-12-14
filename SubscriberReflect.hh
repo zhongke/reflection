@@ -19,8 +19,8 @@ public:
         {
             {
                 "eventTrigger", new CheckerInt<SubscriberPot, SubscriberPod>(
-                    std::bind(&SubscriberPot::eventTrigger_hasValue, pot),
-                    std::bind(&SubscriberPot::eventTrigger_get, pot),
+                    std::mem_fn(&SubscriberPot::eventTrigger_hasValue),
+                    std::mem_fn(&SubscriberPot::eventTrigger_get),
                     std::bind(&SubscriberPod::setEventTrigger, pod, std::placeholders::_1))
             },
             {
