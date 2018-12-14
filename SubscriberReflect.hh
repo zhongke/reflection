@@ -15,7 +15,7 @@ public:
     SubscriberReflect(const PotVector& pv)
         : GenericReflect<SubscriberPot, SubscriberPod>(pv)
     {
-        attributeMap =
+        refectingMap =
         {
             {
                 "eventTrigger", new ProxyInt<SubscriberPot, SubscriberPod>(
@@ -25,16 +25,16 @@ public:
             },
             {
                 "id", new ProxyString<SubscriberPot, SubscriberPod>(
-                    std::bind(&SubscriberPot::id_hasValue, pot),
-                    std::bind(&SubscriberPot::id_get, pot),
-                    std::bind(&SubscriberPod::setId, pod, std::placeholders::_1))
+                    std::mem_fn(&SubscriberPot::id_hasValue),
+                    std::mem_fn(&SubscriberPot::id_get),
+                    std::mem_fn(&SubscriberPod::setId))
             }
         };
     }
 
-    RefectingMap getAttributeMap() const
+    RefectingMap getRefectingMap() const
     {
-        return attributeMap;
+        return refectingMap;
     }
 private:
 

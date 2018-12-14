@@ -24,8 +24,8 @@ public:
     // 2. vector -> selected fields
     PodVector getPodByCondition(std::map<std::string, std::string>& condition, std::vector<std::string> select)
     {
-        auto map = getAttributeMap();
-
+        auto map = getRefectingMap();
+        PodVector pv;
         for (auto pot : potVec)
         {
             // TODO: only check condition
@@ -51,19 +51,32 @@ public:
 
             if (match)
             {
+                auto p = new P;
 
+                for (auto s : select)
+                {
+                    auto it = map.find(s);
+
+                    if (it != map.end())
+                    {
+                        it->second->set(pot, p);
+                        pv.push_back(p);
+                    }
+                    else
+                    {
+                        // TODO: key not match, do sth!!!
+                    }
+                }
             }
         }
 
-        // TODO: Set selected fields if has value
-        PodVector pv;
         return pv;
     }
 
 protected:
-    virtual RefectingMap getAttributeMap() const = 0;
+    virtual RefectingMap getRefectingMap() const = 0;
 
-    RefectingMap attributeMap;
+    RefectingMap refectingMap;
 
     PT* pot;
     P* pod;

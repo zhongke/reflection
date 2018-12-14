@@ -14,29 +14,17 @@ public:
         hasM(has), getterM(getter), setterM(setter)
     {}
 
-    bool operator () (PT* pot, std::string condition)
-    {
-        if (!hasM(pot) or condition != std::to_string(getterM(pot)))
-        {
-            return false;
-        }
-        else
-        {
-            // TODO: Move to another place to handle setter
-            //setterM(getterM(pot));
-        }
-
-        return true;
-
-    }
-
     virtual bool match(PT* pot, const std::string& condition)
     {
-        return true;
+        if (hasM(pot) && std::to_string(getterM(pot)) == condition)
+            return true;
+        else
+            return false;
     }
 
-    virtual void move(PT* pot, P* p, const std::string& select)
+    virtual void set(PT* pot, P* p)
     {
+        setterM(p, getterM(pot));
     }
 
 private:
