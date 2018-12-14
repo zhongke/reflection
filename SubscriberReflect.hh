@@ -21,7 +21,7 @@ public:
                 "eventTrigger", new ProxyInt<SubscriberPot, SubscriberPod>(
                     std::mem_fn(&SubscriberPot::eventTrigger_hasValue),
                     std::mem_fn(&SubscriberPot::eventTrigger_get),
-                    std::bind(&SubscriberPod::setEventTrigger, pod, std::placeholders::_1))
+                    std::mem_fn(&SubscriberPod::setEventTrigger))
             },
             {
                 "id", new ProxyString<SubscriberPot, SubscriberPod>(

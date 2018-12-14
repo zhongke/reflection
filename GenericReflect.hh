@@ -37,7 +37,7 @@ public:
 
                 if (iter != map.end())
                 {
-                    if (!(*iter->second)(pot, c.second))
+                    if (!iter->second->match(pot, c.second))
                     {
                         match = false;
                         break;

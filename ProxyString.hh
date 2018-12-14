@@ -26,6 +26,15 @@ public:
         }
     }
 
+    virtual bool match(PT* pot, const std::string& condition)
+    {
+        return true;
+    }
+
+    virtual void move(PT* pot, P* p, const std::string& select)
+    {
+    }
+
 private:
     std::function<bool()> hasM;
     std::function<std::string()> getterM;
