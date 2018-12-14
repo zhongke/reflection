@@ -19,16 +19,16 @@ public:
               for (const auto& c : condition) {
                       auto iter = map.find(c.first);
                       if (iter != map.end()) {
-                             if (!(iter->second)(c.second))
+                             if (!(*iter->second)(c.second))
                                     break;
                       }
               }
 
        }
-
-       virtual std::map<std::string, CheckerInt<PT, P>> getAttributeMap() const = 0;
+       using RefectingMap=std::map<std::string, Checker<PT, P>*>;
+       virtual RefectingMap getAttributeMap() const = 0;
 protected:
-       std::map<std::string, CheckerInt<PT, P>> attributeMap ;
+       RefectingMap attributeMap ;
 
        PT* pot;
        P* pod;

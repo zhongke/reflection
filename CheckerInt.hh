@@ -1,10 +1,12 @@
 #include <map>
 #include <string>
 
+#include "Checker.hh"
+
 using namespace std;
 
 template<typename PT, typename P>
-class CheckerInt
+class CheckerInt : public Checker <PT, P>
 {
 public:
         CheckerInt(std::function<bool()> has,
