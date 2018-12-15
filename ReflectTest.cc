@@ -14,12 +14,8 @@ class ReflectUtil: public Test
 public:
     GenericReflect<SubscriberPot, SubscriberPod>::PotVector pv =
     {
-        new SubscriberPot{"", 0, 0, ""},
-        new SubscriberPot{"", 0, 0, ""},
-        new SubscriberPot{"", 0, 0, ""},
-        new SubscriberPot{"", 0, 0, ""},
-        new SubscriberPot{"", 0, 0, ""},
-        new SubscriberPot{"", 0, 0, ""}
+        new SubscriberPot{"charlie", 200, 3, "peer_one"},
+        new SubscriberPot{"Darwin", 100, 5, "peer_two"}
     };
     SubscriberReflect reflect;
 
@@ -32,10 +28,12 @@ TEST_F(ReflectUtil, getOneFilter)
 {
     map<string, string> condition
     {
-        {"eventTrigger", "200"},
-        {"id", "charlie"}
+        {"id", "charlie"},
+        {"eventTrigger", "200"}
     };
+
     vector<string> select{"subscriptionType", "peerId"};
-    reflect.getPodByCondition(condition, select);
+
+    ASSERT_THAT(reflect.getPodByCondition(condition, select).size(), Eq(1u));
 }
 

@@ -27,6 +27,6 @@ public:
 private:
     std::pair<std::string, bool> idM;
     std::pair<int, bool> eventTriggerM;
-    std::pair<int, bool> subscriptionType;
-    std::pair<std::string, bool> peerId;
+    std::pair<int, bool> subscriptionTypeM;
+    std::pair<std::string, bool> peerIdM;
 };

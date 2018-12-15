@@ -5,5 +5,5 @@ class Proxy
 {
 public:
     virtual bool match(PT* pot, const std::string& condition) = 0;
-    virtual void set(PT* pot, P* p) = 0;
+    virtual bool set(PT* pot, P* p) = 0;
 };

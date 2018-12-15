@@ -9,7 +9,7 @@ template<typename PT, typename P>
 class GenericReflect
 {
 public:
-    using RefectingMap = std::map<std::string, Proxy<PT, P>*>;
+    using ReflectingMap = std::map<std::string, Proxy<PT, P>*>;
     using PotVector = std::vector<PT*>;
     using PodVector = std::vector<P*>;
 
@@ -25,15 +25,18 @@ public:
     PodVector getPodByCondition(const std::map<std::string, std::string>& condition,
                                 const std::vector<std::string>& select)
     {
-        auto map = getRefectingMap();
+        // std::cout << "potVec size :[" << potVec.size() << "]" << std::endl;
+        auto map = getReflectingMap();
         PodVector pv;
-        for (auto pot : potVec)
+        for (const auto& pot : potVec)
         {
             // TODO: only check condition
             auto matched = true;
 
             for (const auto& c : condition)
             {
+                // std::cout << "key   : [" << c.first << "]" << std::endl;
+                // std::cout << "value : [" << c.second << "]" << std::endl;
                 auto iter = map.find(c.first);
 
                 if (iter != map.end())
@@ -50,35 +53,63 @@ public:
                 }
             }
 
+            // std::cout << "Match ----------------------------------------------" << std::endl;
+
             if (matched)
             {
+                // std::cout << "matched : [" << (matched ? "Matched" : "Unmatched") << "]" << std::endl;
+                // std::cout << "size :[" << select.size() << "]" << std::endl;
                 auto p = new P;
 
-                for (const auto& s : select)
-                {
-                    auto it = map.find(s);
+                // TODO:
+                // if no field was selected only set <ID> field or the POD
+                if (select.empty()) {
+                    // TODO: to be discussed
+                    // This <ID> field is very special in different POT type
+                    // which means it's different field name but same purpose
+                    // So I propose a virtual function to getID() for every Reflect
 
-                    if (it != map.end())
+                    // TODO: More issue here:
+                    // Regarding the POD also need to map the specific <ID> field
+                    p->setId(getId());
+                    pv.push_back(p);
+                }
+                else
+                {
+                    for (const auto& s : select)
                     {
-                        // TODO: Check if this field has value in Pot or not
-                        it->second->set(pot, p);
-                        pv.push_back(p);
-                    }
-                    else
-                    {
-                        // TODO: key not match, do sth!!!
+
+                        std::cout << "field   : [" << s << "]" << std::endl;
+                        auto it = map.find(s);
+
+                        if (it != map.end())
+                        {
+                            if (it->second->set(pot, p))
+                            {
+                                std::cout << "push to vector" << std::endl;
+                                pv.push_back(p);
+                            }
+                        }
+                        else
+                        {
+                            // TODO: key not match, do sth!!!
+                            // throw an exception for HTTP response 422 unprocessable
+                        }
                     }
                 }
             }
+            // std::cout << "Select ----------------------------------------------" << std::endl;
         }
 
         return pv;
     }
 
 protected:
-    virtual RefectingMap getRefectingMap() const = 0;
+    virtual ReflectingMap getReflectingMap() const = 0;
 
-    RefectingMap refectingMap;
+    virtual std::string getId() = 0;
+
+    ReflectingMap reflectingMap;
 
     PT* pot;
     P* pod;

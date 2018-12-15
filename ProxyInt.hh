@@ -22,9 +22,13 @@ public:
             return false;
     }
 
-    virtual void set(PT* pot, P* p)
+    virtual bool set(PT* pot, P* p)
     {
-        setterM(p, getterM(pot));
+        if (hasM(pot)) {
+            setterM(p, getterM(pot));
+            return true;
+        }
+        return false;
     }
 
 private:
