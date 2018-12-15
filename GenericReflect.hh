@@ -36,7 +36,7 @@ public:
 
             for (const auto& c : condition)
             {
-                if (!(matched = map[c.first] == 0 ? false : map[c.first]->match(pot, c.second)))
+                if (!(matched = map[c.first] == nullptr ? false : map[c.first]->match(pot, c.second)))
                     break;
             }
 
@@ -64,20 +64,7 @@ public:
                 {
                     for (auto& s : select)
                     {
-                        //std::cout << "field   : [" << s << "]" << std::endl;
-                        auto it = map.find(s);
-
-                        if (it != map.end())
-                        {
-                            if (it->second->set(pot, p))
-                            {
-                            }
-                        }
-                        else
-                        {
-                            // TODO: key not match, do sth!!!
-                            // throw an exception for HTTP response 422 unprocessable
-                        }
+                        map[s] == nullptr ? false : map[s]->set(pot, p);
                     }
 
                     pv.push_back(p);
