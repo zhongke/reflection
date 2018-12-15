@@ -36,15 +36,7 @@ public:
 
             for (const auto& c : condition)
             {
-                matched = map.end() != find_if(map.begin(), map.end(), [c, pot](auto & r)
-                {
-                    if (r.first == c.first && r.second->match(pot, c.second))
-                        return true;
-                    else
-                        return false;
-                });
-
-                if (!matched)
+                if (!(matched = map[c.first] == 0 ? false : map[c.first]->match(pot, c.second)))
                     break;
             }
 
@@ -91,8 +83,6 @@ public:
                     pv.push_back(p);
                 }
             }
-
-            // std::cout << "Select ----------------------------------------------" << std::endl;
         }
 
         return pv;
