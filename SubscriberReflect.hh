@@ -39,7 +39,7 @@ public:
                     std::mem_fn(&SubscriberPod::setSubscriptionType))
             },
             {
-                "eventTrigger",
+                "peerId",
                 new ProxyString<SubscriberPot, SubscriberPod>(
                     std::mem_fn(&SubscriberPot::peerId_hasValue),
                     std::mem_fn(&SubscriberPot::peerId_get),
@@ -53,7 +53,8 @@ public:
         return reflectingMap;
     }
 
-    std::string getId() {
+    std::string getId()
+    {
         // TODO: We need pot instance here to invoke his member function
         // return SubscriberPot::id_get();
         return pot->id_get();

@@ -43,7 +43,7 @@ TEST_F(ReflectUtil, getOneFilter)
 
     auto pv = reflect.getPodByCondition(condition, select);
 
-    for (auto& p : pv )
+    for (auto& p : pv)
     {
         cout << p->getId() << ", "
              << p->getEventTrigger() << ", "

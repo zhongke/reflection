@@ -28,6 +28,7 @@ public:
         // std::cout << "potVec size :[" << potVec.size() << "]" << std::endl;
         auto map = getReflectingMap();
         PodVector pv;
+
         for (auto& pot : potVec)
         {
             // TODO: only check condition
@@ -35,25 +36,17 @@ public:
 
             for (const auto& c : condition)
             {
-                // std::cout << "key   : [" << c.first << "]" << std::endl;
-                // std::cout << "value : [" << c.second << "]" << std::endl;
-                auto iter = map.find(c.first);
+                matched = map.end() != find_if(map.begin(), map.end(), [c, pot](auto & r)
+                {
+                    if (r.first == c.first && r.second->match(pot, c.second))
+                        return true;
+                    else
+                        return false;
+                });
 
-                if (iter != map.end())
-                {
-                    if (!iter->second->match(pot, c.second))
-                    {
-                        matched = false;
-                        break;
-                    }
-                }
-                else
-                {
-                    // TODO: key not match, do sth!!!
-                }
+                if (!matched)
+                    break;
             }
-
-            // std::cout << "Match ----------------------------------------------" << std::endl;
 
             if (matched)
             {
@@ -63,7 +56,8 @@ public:
 
                 // TODO:
                 // if no field was selected only set <ID> field or the POD
-                if (select.empty()) {
+                if (select.empty())
+                {
                     // TODO: to be discussed
                     // This <ID> field is very special in different POT type
                     // which means it's different field name but same purpose
@@ -76,18 +70,15 @@ public:
                 }
                 else
                 {
-                    for (const auto& s : select)
+                    for (auto& s : select)
                     {
-
-                        std::cout << "field   : [" << s << "]" << std::endl;
+                        //std::cout << "field   : [" << s << "]" << std::endl;
                         auto it = map.find(s);
 
                         if (it != map.end())
                         {
                             if (it->second->set(pot, p))
                             {
-                                std::cout << "push to vector" << std::endl;
-                                pv.push_back(p);
                             }
                         }
                         else
@@ -96,8 +87,11 @@ public:
                             // throw an exception for HTTP response 422 unprocessable
                         }
                     }
+
+                    pv.push_back(p);
                 }
             }
+
             // std::cout << "Select ----------------------------------------------" << std::endl;
         }
 

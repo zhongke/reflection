@@ -23,10 +23,12 @@ public:
 
     virtual bool set(PT* pot, P* p)
     {
-        if (hasM(pot)) {
+        if (hasM(pot))
+        {
             setterM(p, getterM(pot));
             return true;
         }
+
         return false;
     }
 
