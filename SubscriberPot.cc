@@ -8,7 +8,6 @@ SubscriberPot::SubscriberPot(const std::string& id, int eventTrigger, int subscr
     , subscriptionTypeM(make_pair(subscriptionType, true))
     , peerIdM(make_pair(peerId, true))
 {
-
 }
 
 std::string SubscriberPot::id_get() const

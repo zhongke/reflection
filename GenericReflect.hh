@@ -28,7 +28,7 @@ public:
         // std::cout << "potVec size :[" << potVec.size() << "]" << std::endl;
         auto map = getReflectingMap();
         PodVector pv;
-        for (const auto& pot : potVec)
+        for (auto& pot : potVec)
         {
             // TODO: only check condition
             auto matched = true;
