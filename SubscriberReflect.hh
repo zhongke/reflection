@@ -15,14 +15,14 @@ public:
     SubscriberReflect(const PotVector& pv)
         : GenericReflect<SubscriberPot, SubscriberPod>(pv)
     {
+        px = new ProxyString<SubscriberPot, SubscriberPod>(
+            std::mem_fn(&SubscriberPot::id_hasValue),
+            std::mem_fn(&SubscriberPot::id_get),
+            std::mem_fn(&SubscriberPod::setId));
         reflectingMap =
         {
             {
-                "id",
-                new ProxyString<SubscriberPot, SubscriberPod>(
-                    std::mem_fn(&SubscriberPot::id_hasValue),
-                    std::mem_fn(&SubscriberPot::id_get),
-                    std::mem_fn(&SubscriberPod::setId))
+                "id", px
             },
             {
                 "eventTrigger",
@@ -48,17 +48,17 @@ public:
         };
     }
 
-    ReflectingMap getReflectingMap() const
+    virtual ReflectingMap getReflectingMap() const
     {
         return reflectingMap;
     }
 
-    std::string getId()
+    virtual Px getIdProxy() const
     {
-        // TODO: We need pot instance here to invoke his member function
-        // return SubscriberPot::id_get();
-        return pot->id_get();
+        return px;
     }
-private:
 
+private:
+    Px px;
+    ReflectingMap reflectingMap;
 };

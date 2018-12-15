@@ -9,7 +9,8 @@ template<typename PT, typename P>
 class GenericReflect
 {
 public:
-    using ReflectingMap = std::map<std::string, Proxy<PT, P>*>;
+    using Px = Proxy<PT, P>* ;
+    using ReflectingMap = std::map<std::string, Px>;
     using PotVector = std::vector<PT*>;
     using PodVector = std::vector<P*>;
 
@@ -46,29 +47,14 @@ public:
                 // std::cout << "size :[" << select.size() << "]" << std::endl;
                 auto p = new P;
 
-                // TODO:
-                // if no field was selected only set <ID> field or the POD
-                if (select.empty())
-                {
-                    // TODO: to be discussed
-                    // This <ID> field is very special in different POT type
-                    // which means it's different field name but same purpose
-                    // So I propose a virtual function to getID() for every Reflect
+                getIdProxy()->set(pot, p);
 
-                    // TODO: More issue here:
-                    // Regarding the POD also need to map the specific <ID> field
-                    p->setId(getId());
-                    pv.push_back(p);
-                }
-                else
+                for (auto& s : select)
                 {
-                    for (auto& s : select)
-                    {
-                        map[s] == nullptr ? false : map[s]->set(pot, p);
-                    }
-
-                    pv.push_back(p);
+                    map[s] == nullptr ? false : map[s]->set(pot, p);
                 }
+
+                pv.push_back(p);
             }
         }
 
@@ -77,13 +63,7 @@ public:
 
 protected:
     virtual ReflectingMap getReflectingMap() const = 0;
-
-    virtual std::string getId() = 0;
-
-    ReflectingMap reflectingMap;
-
-    PT* pot;
-    P* pod;
+    virtual Px getIdProxy() const = 0;
 
     PotVector potVec;
 };
