@@ -22,14 +22,15 @@ public:
     // std::pair<std::map<std::string, std::vector<std::string>>, std::vector<std::string>>
     // 1. map -> filter key : vector
     // 2. vector -> selected fields
-    PodVector getPodByCondition(std::map<std::string, std::string>& condition, std::vector<std::string> select)
+    PodVector getPodByCondition(const std::map<std::string, std::string>& condition,
+                                const std::vector<std::string>& select)
     {
         auto map = getRefectingMap();
         PodVector pv;
         for (auto pot : potVec)
         {
             // TODO: only check condition
-            auto match = true;
+            auto matched = true;
 
             for (const auto& c : condition)
             {
@@ -39,7 +40,7 @@ public:
                 {
                     if (!iter->second->match(pot, c.second))
                     {
-                        match = false;
+                        matched = false;
                         break;
                     }
                 }
@@ -49,16 +50,17 @@ public:
                 }
             }
 
-            if (match)
+            if (matched)
             {
                 auto p = new P;
 
-                for (auto s : select)
+                for (const auto& s : select)
                 {
                     auto it = map.find(s);
 
                     if (it != map.end())
                     {
+                        // TODO: Check if this field has value in Pot or not
                         it->second->set(pot, p);
                         pv.push_back(p);
                     }
