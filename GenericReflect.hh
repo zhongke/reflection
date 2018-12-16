@@ -19,10 +19,6 @@ public:
     {
     }
 
-    // TODO: Use real condition structure for filter and select
-    // std::pair<std::map<std::string, std::vector<std::string>>, std::vector<std::string>>
-    // 1. map -> filter key : vector
-    // 2. vector -> selected fields
     PodVector getPodByCondition(const std::map<std::string, std::string>& condition,
                                 const std::vector<std::string>& select)
     {
@@ -32,7 +28,6 @@ public:
 
         for (auto& pot : potVec)
         {
-            // TODO: only check condition
             auto matched = true;
 
             for (const auto& c : condition)

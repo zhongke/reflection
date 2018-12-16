@@ -1,6 +1,4 @@
-#include <map>
-#include <string>
-#include <functional>
+#pragma once
 
 #include "Proxy.hh"
 

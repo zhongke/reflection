@@ -15,7 +15,7 @@ link_directories(
 
 # set(Boost_USE_STATIC_LIBS ON)
 
-add_definitions(-std=c++17)
+add_definitions(-std=c++11)
 
 # find_package(
   # Boost $ENV{BOOST_VERSION}
@@ -25,7 +25,6 @@ add_definitions(-std=c++17)
 set(
   sources
   main.cc
-  # SubscriberReflect.cc
   SubscriberPot.cc
   SubscriberPod.cc
   ReflectTest.cc

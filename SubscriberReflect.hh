@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vector>
 #include <functional>
+
 #include "GenericReflect.hh"
 #include "SubscriberPot.hh"
 #include "SubscriberPod.hh"
