@@ -55,13 +55,21 @@ TEST_F(ReflectUtil, getOneFilter)
 
 TEST_F(ReflectUtil, spirit)
 {
-    std::map<std::string(), std::vector<std::pair<std::string,std::string>()>> result;
+    // std::map<std::string(), std::vector<std::pair<std::string, std::string>()>> result;
+    // using boost::spirit::ascii::space;
+    // queryString_grammar<std::string::const_iterator> grammar;
+    // std::string input{"customerId=ezhonke&trafficId=kevinZhong"};
+
+    // bool r = phrase_parse(input.cbegin(), input.cend(), grammar, space, result);
+
+    // std::cout << "result: [" << r << "]" << std::endl;
+
+
     using boost::spirit::ascii::space;
-    queryString_grammar<std::string::const_iterator> grammar;
+
+    QueryStringGrammar<std::string::const_iterator> grammar;
     std::string input{"customerId=ezhonke&trafficId=kevinZhong"};
-
-    bool r = phrase_parse(input.cbegin(), input.cend(), grammar, space, result);
-
-    std::cout << "result: [" << r << "]" << std::endl;
-
+    string result;
+    bool r = phrase_parse(input.begin(), input.end(), grammar, space);
+    std::cout << "result: [" << r << "]" << result << std::endl;
 }

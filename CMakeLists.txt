@@ -2,14 +2,13 @@ project(chapterFirstExample)
 cmake_minimum_required(VERSION 2.6)
 
 include_directories(
-  $ENV{BOOST_ROOT}/include
+  $ENV{BOOST_ROOT}
   $ENV{GMOCK_HOME}/googlemock/include
   $ENV{GMOCK_HOME}/googletest/include
 )
 
 link_directories(
-  $ENV{GMOCK_HOME}/googlemock/mybuild
-  $ENV{GMOCK_HOME}/googletest/mybuild
+  $ENV{GMOCK_HOME}/lib
   $ENV{BOOST_ROOT}/lib
 )
 
