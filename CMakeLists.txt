@@ -2,7 +2,7 @@ project(chapterFirstExample)
 cmake_minimum_required(VERSION 2.6)
 
 include_directories(
-  # $ENV{BOOST_ROOT}
+  $ENV{BOOST_ROOT}/include
   $ENV{GMOCK_HOME}/googlemock/include
   $ENV{GMOCK_HOME}/googletest/include
 )
@@ -10,17 +10,17 @@ include_directories(
 link_directories(
   $ENV{GMOCK_HOME}/googlemock/mybuild
   $ENV{GMOCK_HOME}/googletest/mybuild
-  # $ENV{BOOST_ROOT}/lib
+  $ENV{BOOST_ROOT}/lib
 )
 
-# set(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_STATIC_LIBS ON)
 
 add_definitions(-std=c++11)
 
-# find_package(
-  # Boost $ENV{BOOST_VERSION}
-  # COMPONENTS filesystem system
-# )
+find_package(
+  Boost $ENV{BOOST_VERSION}
+  COMPONENTS spirit
+)
 
 set(
   sources
@@ -36,7 +36,7 @@ add_executable(
 
 target_link_libraries(
   Reflect
-  # ${Boost_LIBRARIES}
+  ${Boost_LIBRARIES}
   gmock
   gtest
   pthread

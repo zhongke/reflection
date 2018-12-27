@@ -3,6 +3,7 @@
 #include "SubscriberReflect.hh"
 #include "SubscriberPot.hh"
 #include "SubscriberPod.hh"
+#include "spirit_parse.cc"
 
 using namespace testing;
 using namespace std;
@@ -50,4 +51,17 @@ TEST_F(ReflectUtil, getOneFilter)
              << p->getSubscriptionType() << ", "
              << p->getPeerId() << endl;
     }
+}
+
+TEST_F(ReflectUtil, spirit)
+{
+    std::map<std::string(), std::vector<std::pair<std::string,std::string>()>> result;
+    using boost::spirit::ascii::space;
+    queryString_grammar<std::string::const_iterator> grammar;
+    std::string input{"customerId=ezhonke&trafficId=kevinZhong"};
+
+    bool r = phrase_parse(input.cbegin(), input.cend(), grammar, space, result);
+
+    std::cout << "result: [" << r << "]" << std::endl;
+
 }
